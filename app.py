@@ -35,6 +35,7 @@ def go_to(urlID):
         if url[0][0][:4] != "http":
             url = [("http://" + url[0][0], 'lol')]
         return render_template('goto.html', has_url='yes', url=url[0][0])
+    return 'what'
 
 if __name__ == '__main__':
     app.debug = True

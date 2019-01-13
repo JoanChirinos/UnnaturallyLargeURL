@@ -26,16 +26,18 @@ def makeURL(url):
     out = ""
     print(exists)
 
-    if len(exists) > 0:
+    if len(exists) == 0:
         newID = ""
-        for i in range(30):
+        for i in range(84):
             newID += str(uuid.uuid1())
         c.execute('INSERT INTO urls VALUES("{}", "{}")'.format(newID, url))
         out = newID
         db.commit()
     else:
         print('else')
-        out = exists[0]
+        print(exists)
+        c.execute('SELECT newID FROM urls WHERE original = "{}"'.format(url))
+        out = c.fetchall()[0][0]
 
     db.close()
 
@@ -53,6 +55,8 @@ def getURL(id):
         return 'Not valid'
     else:
         return og
+
+    return 'what'
 
 
 if __name__ == '__main__':
